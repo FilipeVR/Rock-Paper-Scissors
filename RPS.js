@@ -1,7 +1,7 @@
 const str = ['rock', 'paper', 'scissors'];
 
 function computerPlay() {
-    let ind = Math.floor(Math.random() * 3)
+    let ind = Math.floor(Math.random() * str.length)
     let res = str[ind]
     
     return res
@@ -44,7 +44,7 @@ function playRound(playerSelection = prompt("Rock, Paper or Scissors?").toLowerC
     } else {
         res ="Please insert 'rock', 'paper' or 'scissors'"
         console.log(res)
-        winner = 'none' 
+        winner = 'error' 
     }
 
     return winner
@@ -58,9 +58,12 @@ function game() {
     for (let i = 0; i < 5; i++) {
         let res = playRound()
         if (res === 'player') {
-            playerWins += 1
+            playerWins += 1;
         } else if (res === 'computer') {
-            computerWins += 1
+            computerWins += 1;
+        } else if (res === 'error') {
+            computerWins = 666;
+            break;
         } else {
             playerWins += 0;
             computerWins += 0;
@@ -71,10 +74,12 @@ function game() {
 
     if (playerWins > computerWins) {
         score = `You win! In ${counter} rounds: Player ${playerWins} vs ${computerWins} Computer, with ${counter-(playerWins+computerWins)} Ties.`
-    } else if (computerWins > playerWins) {
+    } else if ((playerWins > 0) && (playerWins < 2)) {
         score = `You loose. In ${counter} rounds: Player ${playerWins} vs ${computerWins} Computer, with ${counter-(playerWins+computerWins)} Ties.`
+    } else if(playerWins === computerWins){
+        score = `Wow, it's a tie! In ${counter} rounds: Player ${playerWins} vs ${computerWins} Computer, with ${counter-(playerWins+computerWins)} Ties. Play Again!`
     } else {
-        score = `Wow, it's a tie! In ${counter} rounds: Player ${playerWins} vs ${computerWins} Computer, with ${counter-(playerWins+computerWins)} Ties.`
+        score = 'error'
     }
 
     return score
