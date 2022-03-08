@@ -50,7 +50,7 @@ function playRound(playerSelection = prompt("Rock, Paper or Scissors?").toLowerC
     return winner
 }
 
-function game() {
+/*function game() {
     let score
     let playerWins = 0
     let computerWins = 0
@@ -83,4 +83,4 @@ function game() {
     }
 
     return score
-}
+}*/
