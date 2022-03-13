@@ -6,49 +6,73 @@ function computerPlay() {
     
     return res
 }
+const sts = document.querySelector('#display span');
 
-function playRound(playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase(), computerSelection = computerPlay()) {
-    let res
-    let winner
-    let ps = playerSelection
-    let cs = computerSelection
+function playRound(playerSelection, computerSelection) {
+    let res;
+    let winner;
+    let ps = playerSelection;
+    let cs = computerSelection;
 
     if (ps === cs) {
-        res = 'It\'s a tie!'
-        console.log(res)
+        sts.textContent = 'Game Status: It\'s a tie!' 
         winner = 'none'
     }else if ((ps===str[0]) && (cs===str[1])) {
-        res = 'Paper beats Rock, You loose.'
-        console.log(res)
+        sts.textContent = 'Game Status: Paper beats Rock, You lost the match.' 
         winner = 'computer'
     }else if ((ps===str[0]) && (cs===str[2])) {
-        res = 'Rock beats Scissors, You win!.'
-        console.log(res)
+        sts.textContent = 'Game Status: Rock beats Scissors, You won the match!' 
         winner = 'player'
     }else if ((ps===str[1]) && (cs===str[2])) {
-        res = 'Scissors beats Paper, You loose.'
-        console.log(res)
+        sts.textContent = 'Game Status: Scissors beats Paper, You lost the match.' 
         winner = 'computer'
     }else if ((ps===str[1]) && (cs===str[0])) {
-        res = 'Paper beats Rock, You win!.'
-        console.log(res)
+        sts.textContent = 'Game Status: Paper beats Rock, You won the match!' 
         winner = 'player'
     }else if ((ps===str[2]) && (cs===str[0])) {
-        res = 'Rock beats Scissors, You loose.'
-        console.log(res)
+        sts.textContent = 'Game Status: Rock beats Scissors, You lost the match.' 
         winner = 'computer'
     }else if ((ps===str[2]) && (cs===str[1])) {
-        res = 'Scissors beats Paper, You win!.'
-        console.log(res)
+        sts.textContent = 'Game Status: Scissors beats Paper, You won the match!' 
         winner = 'player'
-    } else {
-        res ="Please insert 'rock', 'paper' or 'scissors'"
-        console.log(res)
-        winner = 'error' 
     }
-
+    
     return winner
 }
+const buttons = document.querySelectorAll('button');
+
+let playerWins = 0;
+let computerWins = 0;
+
+const player = document.querySelector('#score .player');
+const computer = document.querySelector('#score .computer');
+const score =  document.querySelector('#score .score');
+
+Array.from(buttons).forEach((btn) => {
+    btn.addEventListener('click', () => {
+        let res = playRound(btn.getAttribute('class'), computerPlay())
+        console.log(res);
+        if (res === 'player') {
+            playerWins += 1;
+        } else if (res === 'computer') {
+            computerWins += 1;
+        }
+        
+        player.textContent = `Player: ${playerWins}`
+        computer.textContent = `Computer: ${computerWins}`
+
+        if ((playerWins === 5) || (computerWins === 5)) {
+            if (playerWins > computerWins) {
+                score.textContent = 'Congrats! You Won The Game!'
+            }
+            else if (computerWins > playerWins) {
+                score.textContent = 'You Lost The Game. Try Again!'
+            }
+        }
+            })
+    }
+        );
+
 
 /*function game() {
     let score
