@@ -1,0 +1,27 @@
+html {
+    background-color: rgb(142, 194, 194);
+}
+
+h1 {
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    color: rgb(83, 75, 24);
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+button {
+    font-weight: bolder;
+    border-radius: 5px;
+    background-color: turquoise;
+    border-style: double;
+    color: rgb(83, 75, 24);
+    
+}
+
